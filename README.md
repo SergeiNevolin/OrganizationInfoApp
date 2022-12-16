@@ -29,7 +29,7 @@ http://localhost:8080/api/v1/organizations/?name=гриндата
 ]
 
 
-Также есть поиск по инн по адресу:
+Также есть поиск по инн:
 http://localhost:8080/api/v1/organizations/{inn}
 
 
