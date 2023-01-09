@@ -1,10 +1,7 @@
 package com.greendata.OrganizationInfo.service;
 
-import com.greendata.OrganizationInfo.domain.Organization;
-import com.greendata.OrganizationInfo.model.response.OrganizationResponse;
-import com.greendata.OrganizationInfo.repository.OrganizationRepository;
-import com.sun.istack.NotNull;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -12,19 +9,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.greendata.OrganizationInfo.domain.Organization;
+import com.greendata.OrganizationInfo.model.response.OrganizationResponse;
+import com.greendata.OrganizationInfo.repository.OrganizationRepository;
+import com.sun.istack.NotNull;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class OrganizationServiceImpl implements OrganizationService {
-    private OrganizationRepository organizationRepository;
 
-    @Autowired
-    public OrganizationServiceImpl(OrganizationRepository organizationRepository) {
-        this.organizationRepository = organizationRepository;
-    }
+	@Autowired
+    OrganizationRepository organizationRepository;
 
     //Получаем весь список организаций
     @NotNull
@@ -43,9 +40,11 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional(readOnly = true)
     public OrganizationResponse findByInn(@NotNull String inn) {
-        return organizationRepository.findByInn(inn)
-                .map(this::buildOrganizationResponse)
-                .orElseThrow(() -> new EntityNotFoundException("Organization " + inn + " is not found"));
+        Organization organization = organizationRepository.findByInn(inn);
+        return buildOrganizationResponse(organization);
+        // return organizationRepository.findByInn(inn)
+        //         .map(this::buildOrganizationResponse)
+        //         .orElseThrow(() -> new EntityNotFoundException("Organization " + inn + " is not found"));
     }
 
     //Получаем организацию по названию

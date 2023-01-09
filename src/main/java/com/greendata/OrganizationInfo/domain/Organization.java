@@ -17,26 +17,19 @@ import lombok.experimental.Accessors;
 @Entity
 @Table(name = "entities")
 public class Organization {
-
     @Id
     @Column(name = "inn", nullable = false, length=10)
     private String inn;
-
     @Column(name = "ogrn", nullable = false, length=13)
     private String ogrn;
-
     @Column(name = "kpp", nullable = false, length=9)
     private String kpp;
-
     @Column(name = "name", nullable = false, length=500)
     private String name;
-
     @Column(name = "short_name", nullable = false, length=500)
     private String shortName;
-
     @Column(name = "address", nullable = false, length=500)
     private String address;
-
     @Column(name = "reg_date", nullable = false, length=10)
     private String regDate;
 
