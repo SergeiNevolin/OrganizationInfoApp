@@ -23,19 +23,19 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    //Получаем весь список организаций
+    // Получаем весь список организаций
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     public List<OrganizationResponse> findAll() {
         return organizationService.findAll();
     }
 
-    //Получаем организацию по inn
+    // Получаем организацию по inn
     @GetMapping(value = "/inn/{inn}", produces = APPLICATION_JSON_VALUE)
     public OrganizationResponse findByInn(@PathVariable String inn) {
         return organizationService.findByInn(inn);
     }
 
-    //Получаем организацию по названию
+    // Получаем организацию по названию
     @GetMapping(value = "/", produces = APPLICATION_JSON_VALUE)
     public List<OrganizationResponse> findByName(@RequestParam String name) {
         return organizationService.findByName(name);

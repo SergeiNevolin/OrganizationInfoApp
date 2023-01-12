@@ -22,15 +22,23 @@ public class Address {
     @Override
     public String toString() {
         String addressString = "";
-        if (index != null) addressString += index;
-        if (region != null) addressString += ", " + regionType + " " + region;
-        if (district != null) addressString += ", " + districtType + " " + district;
-        if (settlement != null) addressString += ", " + settlementType + " " + settlement;
-        if (street != null) addressString += ", " + streetType + " " + street;
-        if (house != null) addressString += ", " + house;
-        if (building != null && building.length() > 0) addressString += ", " + building;
-        if (room != null && room.length() > 0) addressString += ", " + room;
-        
+        if (index != null)
+            addressString += index;
+        if (region != null)
+            addressString += ", " + regionType + " " + region;
+        if (district != null)
+            addressString += ", " + districtType + " " + district;
+        if (settlement != null)
+            addressString += ", " + settlementType + " " + settlement;
+        if (street != null)
+            addressString += ", " + streetType + " " + street;
+        if (house != null)
+            addressString += ", " + house;
+        if (building != null && building.length() > 0)
+            addressString += ", " + building;
+        if (room != null && room.length() > 0)
+            addressString += ", " + room;
+
         return addressString;
     }
 }

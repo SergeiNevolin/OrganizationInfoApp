@@ -17,5 +17,3 @@ public interface OrganizationService {
     List<OrganizationResponse> findByName(@NotNull String name);
 
 }
-
-

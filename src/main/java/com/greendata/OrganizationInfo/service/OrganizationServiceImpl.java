@@ -20,22 +20,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrganizationServiceImpl implements OrganizationService {
 
-	@Autowired
+    @Autowired
     OrganizationRepository organizationRepository;
 
-    //Получаем весь список организаций
+    // Получаем весь список организаций
     @NotNull
     @Override
     @Transactional(readOnly = true)
     public List<OrganizationResponse> findAll() {
         Pageable limit = PageRequest.of(0, 10);
-        return organizationRepository.findAll(limit)
-                .stream()
-                .map(this::buildOrganizationResponse)
+        return organizationRepository.findAll(limit).stream().map(this::buildOrganizationResponse)
                 .collect(Collectors.toList());
     }
 
-    //Получаем организацию по инн
+    // Получаем организацию по инн
     @NotNull
     @Override
     @Transactional(readOnly = true)
@@ -43,30 +41,25 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = organizationRepository.findByInn(inn);
         return buildOrganizationResponse(organization);
         // return organizationRepository.findByInn(inn)
-        //         .map(this::buildOrganizationResponse)
-        //         .orElseThrow(() -> new EntityNotFoundException("Organization " + inn + " is not found"));
+        // .map(this::buildOrganizationResponse)
+        // .orElseThrow(() -> new EntityNotFoundException("Organization " + inn + " is
+        // not found"));
     }
 
-    //Получаем организацию по названию
+    // Получаем организацию по названию
     @NotNull
     @Override
     @Transactional(readOnly = true)
     public List<OrganizationResponse> findByName(@NotNull String name) {
-        return organizationRepository.findByShortNameContaining(name.toUpperCase())
-                .stream()
-                .map(this::buildOrganizationResponse)
-                .collect(Collectors.toList());
+        return organizationRepository.findByShortNameContaining(name.toUpperCase()).stream()
+                .map(this::buildOrganizationResponse).collect(Collectors.toList());
     }
 
     @NotNull
     private OrganizationResponse buildOrganizationResponse(@NotNull Organization organization) {
-        return new OrganizationResponse()
-                .setInn(organization.getInn())
-                .setOgrn(organization.getOgrn())
-                .setKpp(organization.getKpp())
-                .setName(organization.getName())
-                .setShortName(organization.getShortName())
-                .setAddress(organization.getAddress())
-                .setRegDate(organization.getRegDate());
+        return new OrganizationResponse().setInn(organization.getInn())
+                .setOgrn(organization.getOgrn()).setKpp(organization.getKpp())
+                .setName(organization.getName()).setShortName(organization.getShortName())
+                .setAddress(organization.getAddress()).setRegDate(organization.getRegDate());
     }
 }
